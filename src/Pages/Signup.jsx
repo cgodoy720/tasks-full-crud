@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Form, Button, Row, Col, Container } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
 
 const Signup = ({ setUser, setToken }) => {
+    const navigate = useNavigate()
     const API = import.meta.env.VITE_BASE_URL
     const [formData, setFormData] = useState({
         username: '',
@@ -37,6 +39,7 @@ const Signup = ({ setUser, setToken }) => {
                         email: '',
                         password_hash: ''
                     }))
+                    navigate('/tasks')
                 } else {
                     console.log(res)
                 }
