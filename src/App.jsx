@@ -7,6 +7,8 @@ import Signup from './Pages/Signup'
 import Login from './Pages/Login'
 import ProtectedRoute from './Pages/ProtectedRoute'
 import Tasks from './Pages/Tasks'
+import NewTaskForm from './Pages/NewTaskForm'
+import EditTaskForm from './Pages/EditTaskForm'
 
 function App() {
   const [user, setUser] = useState(null)
@@ -24,6 +26,28 @@ function App() {
           element={
             <ProtectedRoute
               element={Tasks}
+              isAuthenticated={!!user && !!token}
+              user={user}
+              token={token}
+            />
+          }
+        />
+        <Route 
+          path="/new"
+          element={
+            <ProtectedRoute 
+              element={NewTaskForm}
+              isAuthenticated={!!user && !!token}
+              user={user}
+              token={token}
+            />
+          }
+        />
+        <Route 
+          path="/tasks/:taskId"
+          element={
+            <ProtectedRoute
+              element={EditTaskForm}
               isAuthenticated={!!user && !!token}
               user={user}
               token={token}

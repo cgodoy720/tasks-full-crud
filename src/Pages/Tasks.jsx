@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Container, Button } from 'react-bootstrap'
+import { Table, Container, Button, Nav } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 const Tasks = ({ user, token }) => {
     const API = import.meta.env.VITE_BASE_URL
@@ -40,6 +41,10 @@ const Tasks = ({ user, token }) => {
     return (
         <Container>
             <h2>Task List</h2>
+            <Nav.Link as={Link} to="/new">
+                <Button variant="outline-primary" style={{ marginBottom: "5px" }}
+                >Create Task</Button>
+            </Nav.Link>
             <Table striped bordered hover responsive className="table-sm">
                 <thead>
                     <tr>
@@ -52,7 +57,9 @@ const Tasks = ({ user, token }) => {
                 <tbody>
                     {tasks.length > 0 && tasks.map((task) => (
                         <tr key={task.task_id}>
-                            <td>{task.title}</td>
+                            <td>
+                                <Nav.Link as={Link} to={`/tasks/${task.task_id}`}>{task.title}</Nav.Link>
+                            </td>
                             <td>{task.description}</td>
                             <td>{task.completed ? "Completed" : "Incomplete" }</td>
                             <td>
